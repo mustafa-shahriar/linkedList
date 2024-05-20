@@ -110,6 +110,9 @@ func (linkedList *LinkedList[T]) DeleteLast() *Node[T] {
 	if linkedList.Size == 0 {
 		return nil
 	}
+
+	linkedList.Size--
+
 	if linkedList.Size == 1 {
 		temp := linkedList.Head
 		linkedList.Head = nil
@@ -121,7 +124,6 @@ func (linkedList *LinkedList[T]) DeleteLast() *Node[T] {
 	temp := node.Next
 	node.Next = nil
 	linkedList.Tail = node
-	linkedList.Size--
 	return temp
 }
 
