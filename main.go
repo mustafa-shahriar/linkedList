@@ -17,7 +17,11 @@ func main() {
 	numbers = 10
 	numbers = 20
 	fmt.Println(numbers)
-
+	fmt.Println(numbers)
+	fmt.Println("hell")
+	//TODO:
+	//NOTE:
+	//WARN:
 }
 
 func add() bool {
