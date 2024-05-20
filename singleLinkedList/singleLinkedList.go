@@ -2,21 +2,20 @@ package singleLinkedList
 
 import (
 	"errors"
-	"fmt"
 )
 
-type LinkedList struct {
-	Head *Node
-	Tail *Node
+type LinkedList[T any] struct {
+	Head *Node[T]
+	Tail *Node[T]
 	Size int
 }
 
-type Node struct {
-	Value int
-	Next  *Node
+type Node[T any] struct {
+	Value *T
+	Next  *Node[T]
 }
 
-func (linkedList *LinkedList) GetAtIndex(index int) *Node {
+func (linkedList *LinkedList[T]) GetAtIndex(index int) *Node[T] {
 	node := linkedList.Head
 
 	for i := 0; i < index; i++ {
@@ -26,9 +25,9 @@ func (linkedList *LinkedList) GetAtIndex(index int) *Node {
 	return node
 }
 
-func (linkedList *LinkedList) InsertFirst(value int) *Node {
+func (linkedList *LinkedList[T]) InsertFirst(value *T) *Node[T] {
 
-	var node Node = Node{
+	var node Node[T] = Node[T]{
 		Value: value,
 	}
 
@@ -45,9 +44,9 @@ func (linkedList *LinkedList) InsertFirst(value int) *Node {
 	return &node
 }
 
-func (linkedList *LinkedList) InsertLast(value int) *Node {
+func (linkedList *LinkedList[T]) InsertLast(value *T) *Node[T] {
 
-	var node Node = Node{
+	var node Node[T] = Node[T]{
 		Value: value,
 	}
 
@@ -64,7 +63,7 @@ func (linkedList *LinkedList) InsertLast(value int) *Node {
 	return &node
 }
 
-func (linkedList *LinkedList) InsertAtIndex(value int, index int) (error, *Node) {
+func (linkedList *LinkedList[T]) InsertAtIndex(value *T, index int) (error, *Node[T]) {
 	if index < 0 || index > linkedList.Size {
 		return errors.New("Invalid index"), nil
 	}
@@ -81,7 +80,7 @@ func (linkedList *LinkedList) InsertAtIndex(value int, index int) (error, *Node)
 		node = node.Next
 	}
 
-	newNode := Node{
+	newNode := Node[T]{
 		Value: value,
 		Next:  node.Next,
 	}
@@ -91,7 +90,7 @@ func (linkedList *LinkedList) InsertAtIndex(value int, index int) (error, *Node)
 	return nil, &newNode
 }
 
-func (linkedList *LinkedList) DeleteFirst() *Node {
+func (linkedList *LinkedList[T]) DeleteFirst() *Node[T] {
 	if linkedList.Size == 0 {
 		return nil
 	}
@@ -107,7 +106,7 @@ func (linkedList *LinkedList) DeleteFirst() *Node {
 	return temp
 }
 
-func (linkedList *LinkedList) DeleteLast() *Node {
+func (linkedList *LinkedList[T]) DeleteLast() *Node[T] {
 	if linkedList.Size == 0 {
 		return nil
 	}
@@ -126,7 +125,7 @@ func (linkedList *LinkedList) DeleteLast() *Node {
 	return temp
 }
 
-func (linkedList *LinkedList) DeleteAtIndex(index int) *Node {
+func (linkedList *LinkedList[T]) DeleteAtIndex(index int) *Node[T] {
 	if index == 0 {
 		return linkedList.DeleteFirst()
 	}
@@ -144,17 +143,17 @@ func (linkedList *LinkedList) DeleteAtIndex(index int) *Node {
 	return temp
 }
 
-func (linkedList *LinkedList) PrintAllNode() {
-	if linkedList.Size == 0 {
-		fmt.Println("List is empty")
-	}
-
-	node := linkedList.Head
-	fmt.Println("---------")
-
-	for node != nil {
-		fmt.Println(node.Value)
-		fmt.Println("---------")
-		node = node.Next
-	}
-}
+// func (linkedList *LinkedList[T]) PrintAllNode() {
+// 	if linkedList.Size == 0 {
+// 		fmt.Println("List is empty")
+// 	}
+//
+// 	node := linkedList.Head
+// 	fmt.Println("---------")
+//
+// 	for node != nil {
+// 		fmt.Println(node.Value)
+// 		fmt.Println("---------")
+// 		node = node.Next
+// 	}
+// }
