@@ -95,16 +95,18 @@ func (linkedList *LinkedList[T]) DeleteFirst() *Node[T] {
 		return nil
 	}
 
-	linkedList.Size--
-
 	if linkedList.Size == 1 {
 		temp := linkedList.Head
 		linkedList.Head = nil
 		linkedList.Tail = nil
+		linkedList.Size--
 		return temp
 	}
+
 	temp := linkedList.Head
 	linkedList.Head = linkedList.Head.Next
+	linkedList.Size--
+
 	return temp
 }
 
