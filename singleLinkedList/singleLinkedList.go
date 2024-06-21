@@ -76,10 +76,6 @@ func (linkedList *LinkedList[T]) InsertAtIndex(value *T, index int) (error, *Nod
 
 	node := linkedList.GetAtIndex(index - 1)
 
-	for i := 1; i < index; i++ {
-		node = node.Next
-	}
-
 	newNode := Node[T]{
 		Value: value,
 		Next:  node.Next,
@@ -111,23 +107,16 @@ func (linkedList *LinkedList[T]) DeleteFirst() *Node[T] {
 }
 
 func (linkedList *LinkedList[T]) DeleteLast() *Node[T] {
-	if linkedList.Size == 0 {
-		return nil
-	}
-
-	linkedList.Size--
-
-	if linkedList.Size == 1 {
-		temp := linkedList.Head
-		linkedList.Head = nil
-		linkedList.Tail = nil
-		return temp
+	if linkedList.Size <= 1 {
+		return linkedList.DeleteFirst()
 	}
 
 	node := linkedList.GetAtIndex(linkedList.Size - 2)
 	temp := node.Next
 	node.Next = nil
 	linkedList.Tail = node
+	linkedList.Size--
+
 	return temp
 }
 
