@@ -16,6 +16,10 @@ type Node[T any] struct {
 }
 
 func (linkedList *LinkedList[T]) GetAtIndex(index int) *Node[T] {
+	if index < 0 || index >= linkedList.Size {
+		return nil
+	}
+
 	node := linkedList.Head
 
 	for i := 0; i < index; i++ {
